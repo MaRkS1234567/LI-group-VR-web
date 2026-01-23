@@ -1,0 +1,280 @@
+// ═══════════════════════════════════════════════════════════
+// SCSS MIXINS
+// ═══════════════════════════════════════════════════════════
+
+@import './variables.scss';
+
+// ─────────────────────────────────────────────────────────────
+// RESPONSIVE BREAKPOINTS
+// ─────────────────────────────────────────────────────────────
+
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-2xl: 1400px;
+
+@mixin mobile {
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: $breakpoint-md) and (max-width: #{$breakpoint-lg - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin desktop-lg {
+  @media (min-width: $breakpoint-xl) {
+    @content;
+  }
+}
+
+@mixin desktop-xl {
+  @media (min-width: $breakpoint-2xl) {
+    @content;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// LAYOUT MIXINS
+// ─────────────────────────────────────────────────────────────
+
+@mixin container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding-left: $container-padding;
+  padding-right: $container-padding;
+
+  @include mobile {
+    padding-left: $container-padding-mobile;
+    padding-right: $container-padding-mobile;
+  }
+}
+
+@mixin section-padding {
+  padding-top: $section-padding-y;
+  padding-bottom: $section-padding-y;
+
+  @include mobile {
+    padding-top: $section-padding-y-mobile;
+    padding-bottom: $section-padding-y-mobile;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// ─────────────────────────────────────────────────────────────
+// TYPOGRAPHY MIXINS
+// ─────────────────────────────────────────────────────────────
+
+@mixin heading-1 {
+  font-family: $font-display;
+  font-size: $font-size-5xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  letter-spacing: -0.02em;
+
+  @include mobile {
+    font-size: $font-size-3xl;
+  }
+}
+
+@mixin heading-2 {
+  font-family: $font-display;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-snug;
+  letter-spacing: -0.01em;
+
+  @include mobile {
+    font-size: $font-size-2xl;
+  }
+}
+
+@mixin heading-3 {
+  font-family: $font-display;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-snug;
+
+  @include mobile {
+    font-size: $font-size-xl;
+  }
+}
+
+@mixin body-text {
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-normal;
+  color: $color-text-secondary;
+}
+
+@mixin body-large {
+  font-family: $font-primary;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-relaxed;
+  color: $color-text-secondary;
+
+  @include mobile {
+    font-size: $font-size-base;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// VISUAL MIXINS
+// ─────────────────────────────────────────────────────────────
+
+@mixin card-style {
+  background: $gradient-card;
+  border: $border-width solid $border-color;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+
+  @include mobile {
+    padding: $spacing-lg;
+  }
+}
+
+@mixin glass-effect {
+  background: rgba(20, 20, 23, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: $border-width solid rgba(255, 255, 255, 0.08);
+}
+
+@mixin hover-lift {
+  transition: transform $transition-smooth, box-shadow $transition-smooth;
+
+  &:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: $shadow-hover;
+  }
+}
+
+@mixin hover-scale {
+  transition: transform $transition-smooth, box-shadow $transition-smooth;
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: $shadow-hover;
+  }
+}
+
+@mixin focus-ring {
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px $color-primary-glow;
+  }
+  
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px $color-primary-glow;
+  }
+}
+
+@mixin glow-underline {
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: $gradient-primary;
+    transition: width $transition-smooth;
+    box-shadow: $shadow-glow-primary;
+  }
+  
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// FORM MIXINS
+// ─────────────────────────────────────────────────────────────
+
+@mixin input-base {
+  width: 100%;
+  padding: $spacing-md $spacing-lg;
+  background: $color-dark-elevated;
+  border: $border-width solid $border-color;
+  border-radius: $radius-md;
+  color: $color-text-primary;
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  transition: border-color $transition-base, box-shadow $transition-base;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:hover {
+    border-color: $border-color-hover;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+    box-shadow: 0 0 0 3px $color-primary-glow;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// GRID MIXINS
+// ─────────────────────────────────────────────────────────────
+
+@mixin grid($columns: 1, $gap: $spacing-lg) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+@mixin grid-responsive($mobile-cols: 1, $tablet-cols: 2, $desktop-cols: 3, $gap: $spacing-lg) {
+  display: grid;
+  gap: $gap;
+  grid-template-columns: repeat($mobile-cols, 1fr);
+
+  @include tablet-up {
+    grid-template-columns: repeat($tablet-cols, 1fr);
+  }
+
+  @include desktop {
+    grid-template-columns: repeat($desktop-cols, 1fr);
+  }
+}

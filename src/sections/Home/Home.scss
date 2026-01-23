@@ -1,0 +1,208 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.home {
+  min-height: 100vh;
+  @include flex-center;
+  position: relative;
+  padding-top: calc($header-height + $spacing-3xl);
+
+  @include mobile {
+    padding-top: calc($header-height-mobile + $spacing-2xl);
+    min-height: auto;
+    padding-bottom: $spacing-3xl;
+  }
+
+  &__container {
+    position: relative;
+    z-index: 2;
+  }
+
+  &__content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__motto {
+    @include heading-1;
+    font-size: $font-size-5xl;
+    margin-top: $spacing-5xl;
+    margin-bottom: $spacing-3xl;
+    background: linear-gradient(
+      135deg,
+      $color-text-primary 0%,
+      $color-text-primary 40%,
+      $color-primary-light 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    @include desktop-lg {
+      font-size: $font-size-6xl;
+    }
+
+    @include mobile {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  &__description {
+    @include body-large;
+    max-width: 600px;
+    margin: 0 auto $spacing-2xl;
+    color: $color-text-secondary;
+  }
+
+  &__cta {
+    margin-bottom: $spacing-4xl;
+
+    @include mobile {
+      margin-bottom: $spacing-3xl;
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // STATS
+  // ─────────────────────────────────────────────────────────────
+
+  &__stats {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-3xl;
+
+    @include mobile {
+      gap: $spacing-xl;
+      flex-wrap: wrap;
+    }
+  }
+
+  &__stat {
+    text-align: center;
+    padding: $spacing-lg $spacing-xl;
+    background: rgba(255, 255, 255, 0.03);
+    border: $border-width solid rgba(255, 255, 255, 0.06);
+    border-radius: $radius-lg;
+    transition: all $transition-smooth;
+
+    &:hover {
+      border-color: $color-primary;
+      background: rgba($color-primary, 0.05);
+      transform: translateY(-4px);
+    }
+
+    @include mobile {
+      padding: $spacing-md $spacing-lg;
+      flex: 1;
+      min-width: 100px;
+    }
+  }
+
+  &__stat-value {
+    display: block;
+    font-family: $font-display;
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+    margin-bottom: $spacing-xs;
+
+    @include mobile {
+      font-size: $font-size-xl;
+    }
+  }
+
+  &__stat-label {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // DECORATIONS
+  // ─────────────────────────────────────────────────────────────
+
+  &__decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  &__circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba($color-primary, 0.2);
+
+    &--1 {
+      width: 400px;
+      height: 400px;
+      top: 10%;
+      right: -100px;
+      opacity: 0.5;
+
+      @include mobile {
+        width: 200px;
+        height: 200px;
+        right: -50px;
+      }
+    }
+
+    &--2 {
+      width: 300px;
+      height: 300px;
+      bottom: 20%;
+      left: -80px;
+      border-color: rgba($color-accent, 0.15);
+
+      @include mobile {
+        width: 150px;
+        height: 150px;
+        left: -40px;
+      }
+    }
+  }
+
+  &__line {
+    position: absolute;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba($color-primary, 0.3) 50%,
+      transparent 100%
+    );
+    height: 1px;
+
+    &--1 {
+      width: 200px;
+      top: 30%;
+      left: 5%;
+      transform: rotate(-15deg);
+
+      @include mobile {
+        display: none;
+      }
+    }
+
+    &--2 {
+      width: 150px;
+      bottom: 25%;
+      right: 10%;
+      transform: rotate(20deg);
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba($color-accent, 0.3) 50%,
+        transparent 100%
+      );
+
+      @include mobile {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,107 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.accordion-item {
+  background: $gradient-card;
+  border: $border-width solid $border-color;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  transition: all $transition-smooth;
+
+  &:hover {
+    border-color: $border-color-hover;
+  }
+
+  &--open {
+    border-color: $color-primary;
+    box-shadow: 0 0 20px $color-primary-glow;
+
+    .accordion-item__icon-vertical {
+      transform: rotate(90deg);
+      opacity: 0;
+    }
+
+    .accordion-item__content {
+      max-height: 500px;
+      opacity: 1;
+    }
+  }
+
+  &__header {
+    width: 100%;
+    @include flex-between;
+    padding: $spacing-lg $spacing-xl;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background $transition-smooth;
+
+    @include mobile {
+      padding: $spacing-md $spacing-lg;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-primary;
+      outline-offset: -2px;
+    }
+  }
+
+  &__question {
+    font-family: $font-primary;
+    font-size: $font-size-md;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+    padding-right: $spacing-md;
+
+    @include mobile {
+      font-size: $font-size-base;
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    color: $color-primary;
+    transition: transform $transition-smooth;
+
+    svg {
+      display: block;
+    }
+
+    &-vertical {
+      transform-origin: center;
+      transition: all $transition-smooth;
+    }
+  }
+
+  &__content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+
+  &__answer {
+    padding: 0 $spacing-xl $spacing-xl;
+    @include body-text;
+    line-height: $line-height-relaxed;
+
+    @include mobile {
+      padding: 0 $spacing-lg $spacing-lg;
+    }
+  }
+}

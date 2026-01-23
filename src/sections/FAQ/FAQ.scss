@@ -1,0 +1,56 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.faq {
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-3xl;
+
+    @include desktop {
+      grid-template-columns: 1.2fr 1fr;
+      align-items: start;
+    }
+  }
+
+  &__questions {
+    @include desktop {
+      position: sticky;
+      top: calc($header-height + $spacing-xl);
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // CABINET PREVIEW
+  // ─────────────────────────────────────────────────────────────
+
+  &__cabinet-preview {
+    @include mobile {
+      order: -1;
+    }
+  }
+
+  &__cabinet-title {
+    font-family: $font-display;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__cabinet-desc {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__screenshots {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+}

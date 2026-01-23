@@ -1,0 +1,74 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
+.section-title {
+  margin-bottom: $spacing-3xl;
+
+  @include mobile {
+    margin-bottom: $spacing-2xl;
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // ALIGNMENT
+  // ─────────────────────────────────────────────────────────────
+
+  &--center {
+    text-align: center;
+
+    .section-title__accent-line {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  &--left {
+    text-align: left;
+  }
+
+  &--right {
+    text-align: right;
+
+    .section-title__accent-line {
+      margin-left: auto;
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // ELEMENTS
+  // ─────────────────────────────────────────────────────────────
+
+  &__accent-line {
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: $gradient-primary;
+    border-radius: $radius-full;
+    margin-bottom: $spacing-lg;
+    box-shadow: $shadow-glow-primary;
+  }
+
+  &__heading {
+    @include heading-2;
+    color: $color-text-primary;
+    margin-bottom: $spacing-md;
+
+    .section-title--accent & {
+      background: linear-gradient(135deg, $color-text-primary 0%, $color-primary-light 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  &__subtitle {
+    @include body-large;
+    color: $color-text-secondary;
+    max-width: 600px;
+    margin: 0;
+
+    .section-title--center & {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}

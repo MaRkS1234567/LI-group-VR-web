@@ -1,0 +1,102 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
+.placeholder-media {
+  position: relative;
+  background: $color-dark-elevated;
+  border: $border-width dashed $border-color;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  @include flex-center;
+  transition: all $transition-smooth;
+
+  &:hover {
+    border-color: $color-primary;
+    background: rgba($color-primary, 0.05);
+
+    .placeholder-media__icon {
+      color: $color-primary;
+      transform: scale(1.1);
+    }
+  }
+
+  &__content {
+    @include flex-column;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-xl;
+  }
+
+  &__icon {
+    color: $color-text-muted;
+    transition: all $transition-smooth;
+
+    svg {
+      display: block;
+    }
+  }
+
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // TYPE VARIANTS
+  // ─────────────────────────────────────────────────────────────
+
+  &--video {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 80px;
+      height: 80px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: rgba($color-primary, 0.1);
+      border: 2px solid rgba($color-primary, 0.3);
+      opacity: 0;
+      transition: opacity $transition-smooth;
+    }
+
+    &:hover::after {
+      opacity: 1;
+    }
+  }
+
+  &--image {
+    background: linear-gradient(
+      135deg,
+      $color-dark-elevated 0%,
+      $color-dark 100%
+    );
+  }
+
+  &--screenshot {
+    border-style: solid;
+    background: $color-dark;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 30px;
+      background: $color-dark-elevated;
+      border-bottom: $border-width solid $border-color;
+      display: flex;
+      align-items: center;
+      padding-left: $spacing-md;
+    }
+
+    .placeholder-media__content {
+      padding-top: $spacing-3xl;
+    }
+  }
+}

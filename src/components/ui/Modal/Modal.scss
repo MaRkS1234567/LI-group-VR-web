@@ -1,0 +1,110 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+@import '../../../styles/animations.scss';
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  @include flex-center;
+  z-index: $z-modal-overlay;
+  padding: $spacing-lg;
+  animation: modalBackdrop 0.3s ease forwards;
+}
+
+.modal {
+  background: $color-dark;
+  border: $border-width solid $border-color;
+  border-radius: $radius-xl;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: modalContent 0.3s ease forwards;
+  box-shadow: $shadow-xl;
+
+  // ─────────────────────────────────────────────────────────────
+  // SIZE VARIANTS
+  // ─────────────────────────────────────────────────────────────
+
+  &--sm {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  &--md {
+    width: 100%;
+    max-width: 520px;
+  }
+
+  &--lg {
+    width: 100%;
+    max-width: 720px;
+  }
+
+  &--xl {
+    width: 100%;
+    max-width: 960px;
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // ELEMENTS
+  // ─────────────────────────────────────────────────────────────
+
+  &__header {
+    @include flex-between;
+    padding: $spacing-xl;
+    border-bottom: $border-width solid $border-color;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+  }
+
+  &__close {
+    @include flex-center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    border-radius: $radius-md;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-smooth;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: $color-text-primary;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-primary;
+    }
+
+    svg {
+      display: block;
+    }
+  }
+
+  &__content {
+    padding: $spacing-xl;
+    overflow-y: auto;
+
+    @include mobile {
+      padding: $spacing-lg;
+    }
+  }
+}

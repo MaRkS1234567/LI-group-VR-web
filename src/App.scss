@@ -1,0 +1,15 @@
+@import './styles/globals.scss';
+
+.app {
+  position: relative;
+  min-height: 100hv;
+
+  &__main {
+    position: relative;
+    z-index: 1;
+  }
+
+  &--cabinet {
+    background: $color-black;
+  }
+}
