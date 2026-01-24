@@ -1,10 +1,9 @@
-import React from 'react';
-import { useLanguage } from '../../context/LanguageContext';
-import SectionTitle from '../../components/ui/SectionTitle/SectionTitle';
-import Accordion from '../../components/ui/Accordion/Accordion';
-import PlaceholderMedia from '../../components/ui/PlaceholderMedia/PlaceholderMedia';
-import Card from '../../components/ui/Card/Card';
-import './FAQ.scss';
+import React from 'react'
+import Accordion from '../../components/ui/Accordion/Accordion'
+import Card from '../../components/ui/Card/Card'
+import SectionTitle from '../../components/ui/SectionTitle/SectionTitle'
+import { useLanguage } from '../../context/LanguageContext'
+import './FAQ.scss'
 
 const FAQ = () => {
   const { t } = useLanguage();
@@ -32,12 +31,13 @@ const FAQ = () => {
               
               <div className="faq__screenshots">
                 {[1, 2, 3, 4].map((num) => (
-                  <PlaceholderMedia
-                    key={num}
-                    label={`${t('faq.screenshotLabel')} ${num}`}
-                    type="screenshot"
-                    aspectRatio="4/3"
-                  />
+                  <img
+                  key={num}
+                  src={`/images/faq/${num}.png`}   // ← если у тебя .png, поменяй на .png
+                  alt={`${t("faq.screenshotLabel")} ${num}`}
+                  className="faq__screenshot"
+                  loading="lazy"
+                />
                 ))}
               </div>
             </Card>

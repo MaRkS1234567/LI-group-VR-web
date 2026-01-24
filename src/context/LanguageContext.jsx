@@ -151,7 +151,7 @@ const translations = {
       },
       analytics: {
         title: 'Аналитика',
-        users: '156 пользователей',
+        users: '156 учеников',
         description: 'Статистика обучения',
       },
       support: {

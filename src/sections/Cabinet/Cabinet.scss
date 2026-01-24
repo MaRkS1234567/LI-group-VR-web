@@ -46,6 +46,8 @@
     display: flex;
     gap: $spacing-lg;
     align-items: flex-start;
+    height: 100%; 
+    
 
     &--success {
       .cabinet__card-icon {
