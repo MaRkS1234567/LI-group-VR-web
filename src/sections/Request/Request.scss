@@ -121,6 +121,11 @@
     align-items: flex-start;
   }
 
+  .request__step[data-step="2"] .request__step-number {
+    background: $color-accent;
+    color: $color-black;
+  }
+
   &__step-number {
     @include flex-center;
     flex-shrink: 0;

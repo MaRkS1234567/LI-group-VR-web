@@ -2,6 +2,64 @@
 @import '../../styles/mixins.scss';
 
 .about {
+
+  &__video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    position: relative;
+    display: block;
+    padding: 0;
+    border: $border-width solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+    transition: transform $transition-smooth, box-shadow $transition-smooth, border-color $transition-smooth;
+
+    &:hover {
+      transform: scale(1.02);
+      border-color: rgba($color-primary, 0.6);
+      box-shadow: 0 10px 30px rgba($color-primary, 0.22), 0 0 0 2px rgba($color-primary, 0.18);
+      z-index: 2;
+    }
+  }
+
+  &__video-el {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__video-play {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+
+    &::before {
+      content: "";
+      width: 72px;
+      height: 72px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(6px);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 18px solid rgba(255, 255, 255, 0.9);
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      margin-left: 6px;
+    }
+  }
+
   &__container {
     position: relative;
   }

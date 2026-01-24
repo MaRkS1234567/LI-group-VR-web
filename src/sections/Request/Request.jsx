@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useLanguage } from '../../context/LanguageContext';
-import SectionTitle from '../../components/ui/SectionTitle/SectionTitle';
-import Card from '../../components/ui/Card/Card';
-import Button from '../../components/ui/Button/Button';
-import './Request.scss';
+import React, { useState } from 'react'
+import Button from '../../components/ui/Button/Button'
+import Card from '../../components/ui/Card/Card'
+import SectionTitle from '../../components/ui/SectionTitle/SectionTitle'
+import { useLanguage } from '../../context/LanguageContext'
+import './Request.scss'
 
 const Request = ({ selectedPackage }) => {
   const { t } = useLanguage();
@@ -164,7 +164,7 @@ const Request = ({ selectedPackage }) => {
 
             <div className="request__step-connector" />
 
-            <div className="request__step">
+            <div className="request__step" data-step="2">
               <div className="request__step-number">2</div>
               <div className="request__step-content">
                 <h4>{t('request.steps.step2')}</h4>

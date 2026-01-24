@@ -1,22 +1,38 @@
-import React from 'react';
-import { useLanguage } from '../../context/LanguageContext';
-import SectionTitle from '../../components/ui/SectionTitle/SectionTitle';
-import Card from '../../components/ui/Card/Card';
-import Button from '../../components/ui/Button/Button';
-import PlaceholderMedia from '../../components/ui/PlaceholderMedia/PlaceholderMedia';
-import './Packages.scss';
+import React, { useRef } from 'react'
+import Button from '../../components/ui/Button/Button'
+import Card from '../../components/ui/Card/Card'
+import SectionTitle from '../../components/ui/SectionTitle/SectionTitle'
+import { useLanguage } from '../../context/LanguageContext'
+import './Packages.scss'
 
 const Packages = ({ onSelectPackage }) => {
   const { t } = useLanguage();
 
+  const videoRefs = useRef({}); // { vrStart: HTMLVideoElement, vrPro: HTMLVideoElement }
+
+  const openFullscreen = async (key) => {
+    const el = videoRefs.current[key];
+    if (!el) return;
+
+    // iOS Safari
+    if (el.webkitEnterFullscreen) {
+      el.play();
+      el.webkitEnterFullscreen();
+      return;
+    }
+
+    try {
+      if (el.requestFullscreen) await el.requestFullscreen();
+      await el.play();
+    } catch (e) {
+      el.play();
+    }
+  };
+
   const handleSelectPackage = (packageName) => {
-    if (onSelectPackage) {
-      onSelectPackage(packageName);
-    }
+    if (onSelectPackage) onSelectPackage(packageName);
     const element = document.getElementById('request');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
 
   const packages = [
@@ -41,11 +57,7 @@ const Packages = ({ onSelectPackage }) => {
   return (
     <section id="packages" className="packages section section-animate">
       <div className="packages__container container">
-        <SectionTitle
-          title={t('packages.title')}
-          subtitle={t('packages.subtitle')}
-          accent
-        />
+        <SectionTitle title={t('packages.title')} subtitle={t('packages.subtitle')} accent />
 
         <div className="packages__grid">
           {packages.map((pkg) => (
@@ -56,8 +68,8 @@ const Packages = ({ onSelectPackage }) => {
               hoverable
               className={`packages__card ${pkg.accent ? 'packages__card--featured' : ''}`}
             >
-              {pkg.accent && <div className="packages__badge">Popular</div>}
-              
+              {pkg.accent && <div className="packages__badge">Выгодно</div>}
+
               <div className="packages__header">
                 <h3 className="packages__name">{pkg.name}</h3>
                 <div className="packages__price">
@@ -80,15 +92,31 @@ const Packages = ({ onSelectPackage }) => {
               </ul>
 
               <div className="packages__media">
-                <PlaceholderMedia
-                  label={`${t('packages.mediaLabel')} 1`}
-                  type="video"
-                  aspectRatio="16/9"
-                />
-                <PlaceholderMedia
-                  label={`${t('packages.mediaLabel')} 2`}
-                  type="image"
-                  aspectRatio="16/9"
+                {/* ВИДЕО 1:1 + POSTER + FULLSCREEN */}
+                <button
+                  type="button"
+                  className="packages__video"
+                  onClick={() => openFullscreen(pkg.key)}
+                  aria-label={`${t('packages.mediaLabel')} video`}
+                >
+                  <video
+                    ref={(el) => { if (el) videoRefs.current[pkg.key] = el; }}
+                    className="packages__video-el"
+                    src={`/media/packages/${pkg.key}.mp4`}
+                    poster={`/media/packages/${pkg.key}.jpg`}
+                    preload="metadata"
+                    muted
+                    playsInline
+                  />
+                  <span className="packages__video-play" aria-hidden="true" />
+                </button>
+
+                {/* КАРТИНКА как у тебя */}
+                <img
+                  className="packages__image"
+                  src={`/images/packages/${pkg.key}.jpg`}
+                  alt={`${pkg.name} preview`}
+                  loading="lazy"
                 />
               </div>
 
