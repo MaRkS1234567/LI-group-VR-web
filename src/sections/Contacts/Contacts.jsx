@@ -38,7 +38,8 @@ const Contacts = () => {
           </div>
 
           <div className="contacts__brand">
-            © {new Date().getFullYear()} LI group | by @marksharapov
+            © {new Date().getFullYear()} LI group | by{' '}
+            <a className="contacts__brand-link" href="#">@marksharapov</a>
           </div>
         </div>
       </div>
